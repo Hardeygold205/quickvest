@@ -37,7 +37,9 @@ export default function TabBar() {
   return (
     <nav className="fixed bottom-5 left-0 right-0 z-50 rounded-full border-t border-gray-200 shadow-sm px-6 p-2 py-2 flex justify-between items-center max-w-2xl mx-auto">
       {tabs.map((tab) => {
-        const isActive = pathname.startsWith(tab.href);
+        const isActive =
+          tab.href === "/" ? pathname === "/" : pathname.startsWith(tab.href);
+
         return (
           <Link
             key={tab.href}

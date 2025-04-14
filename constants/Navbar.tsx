@@ -1,14 +1,15 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { MdForwardToInbox } from "react-icons/md";
 import { HiOutlineGlobeAlt } from "react-icons/hi";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { useSession } from "next-auth/react";
 import SignOutButton from "@/constants/SignOutButton";
 
-export default async function Navbar() {
-  const session = await getServerSession(authOptions);
+export default function Navbar() {
+  const { data: session, status } = useSession();
 
   return (
     <div className="navbar bg-base-300 shadow-md rounded-b-xl px-2">
@@ -27,11 +28,12 @@ export default async function Navbar() {
             QuickVest
           </span>
         </Link>
+
         <div className="flex items-center space-x-4">
-          {!session && (
+          {status !== "authenticated" && (
             <Link
               href="/login"
-              className="btn hidden md:flex bg-green-700 hover:scale-95 transition-all duration-300 border border-[#e5e5e5] text-white">
+              className="btn bg-green-700 hover:scale-95 transition-all duration-300 border border-[#e5e5e5] text-white">
               <svg
                 aria-label="Email icon"
                 width="16"
@@ -48,11 +50,11 @@ export default async function Navbar() {
                   <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
                 </g>
               </svg>
-              Login with Email
+              Login <span className="hidden md:flex">with Email</span>
             </Link>
           )}
 
-          {session ? (
+          {status === "authenticated" && session?.user && (
             <>
               <div className="dropdown dropdown-end relative">
                 <div
@@ -66,7 +68,7 @@ export default async function Navbar() {
                       width={40}
                       height={40}
                       alt="user avatar"
-                      src={session.user?.image || "/user_avatar.webp"}
+                      src={session.user.image || "/user_avatar.webp"}
                     />
                   </div>
                 </div>
@@ -88,7 +90,7 @@ export default async function Navbar() {
                 <MdForwardToInbox className="text-2xl" />
               </div>
             </>
-          ) : null}
+          )}
 
           <div className="dropdown dropdown-end">
             <div

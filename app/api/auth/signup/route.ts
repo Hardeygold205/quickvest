@@ -26,14 +26,22 @@ export async function POST(req: Request) {
         { status: 400 }
       );
     }
-    const existingUser = await sql`
-      SELECT id, email, name
-      FROM users
-      WHERE LOWER(email) = LOWER(${email})
-      LIMIT 1;
+
+    await sql`
+      CREATE TABLE IF NOT EXISTS public.users (
+        id SERIAL PRIMARY KEY,
+        email VARCHAR(255) UNIQUE NOT NULL,
+        password VARCHAR(255) NOT NULL,
+        name VARCHAR(255) NOT NULL,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+      );
     `;
 
-    if (existingUser) {
+    const existingUser = await sql`
+      SELECT id FROM users WHERE LOWER(email) = LOWER(${email}) LIMIT 1;
+    `;
+
+    if (existingUser.length > 0) {
       return NextResponse.json(
         { message: "Email already in use" },
         { status: 400 }
