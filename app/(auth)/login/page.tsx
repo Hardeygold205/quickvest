@@ -2,7 +2,7 @@ import React from "react";
 import { AuthForm } from "@/components/AuthForm";
 import { redirect } from "next/navigation";
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/lib/authOptions";
 
 export default async function LoginPage() {
   const session = await getServerSession(authOptions);
@@ -13,7 +13,7 @@ export default async function LoginPage() {
 
   return (
     <div className="flex items-center justify-center w-full">
-      <div className="max-w-md w-full space-y-8 rounded-lg shadow-md">
+      <div className="max-w-md w-full space-y-8 p-1 rounded-lg shadow-md">
         <div className="text-center">
           <h2 className="mt-6 text-3xl font-extrabold">
             Sign in to your account
