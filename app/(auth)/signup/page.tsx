@@ -1,3 +1,4 @@
+import React from "react";
 import { AuthForm } from "@/components/AuthForm";
 import { redirect } from "next/navigation";
 import { getServerSession } from "next-auth";
@@ -11,12 +12,10 @@ export default async function RegisterPage() {
   }
 
   return (
-    <div className="flex items-center justify-center w-full">
-      <div className="max-w-md w-full space-y-8 p-1 rounded-lg shadow-md">
+    <div className="flex justify-center p-1 sm:p-28 justify-items-center w-full">
+      <div className="max-w-md w-full space-y-8 p-2 rounded-lg shadow-xl">
         <div className="text-center">
-          <h2 className="mt-6 text-3xl font-extrabold">
-            Create a new account
-          </h2>
+          <h2 className="mt-6 text-3xl font-extrabold">Create a new account</h2>
           <p className="mt-2 text-sm">
             Or{" "}
             <a

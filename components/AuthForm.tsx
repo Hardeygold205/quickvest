@@ -97,19 +97,19 @@ export function AuthForm({ action }: AuthFormProps) {
   };
 
   return (
-    <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
+    <form className="mt-8 space-y-6 p-1" onSubmit={handleSubmit}>
       {(authError || errors.form) && (
         <div className="px-4 py-3 bg-red-50 text-red-700 rounded-md">
           {authError || errors.form}
         </div>
       )}
 
-      <div className="rounded-md shadow-sm space-y-4">
+      <div className="rounded-md shadow-sm space-y-4 p-1">
         {action === "signup" && (
           <div>
             <label
               htmlFor="name"
-              className="block text-sm font-medium mb-1">
+              className="block text-sm mb-1 font-bold">
               Full Name
             </label>
             <input
@@ -132,7 +132,7 @@ export function AuthForm({ action }: AuthFormProps) {
         <div>
           <label
             htmlFor="email"
-            className="block text-sm font-medium mb-1">
+            className="block text-sm mb-1 font-bold">
             Email address
           </label>
           <input
@@ -154,7 +154,7 @@ export function AuthForm({ action }: AuthFormProps) {
         <div>
           <label
             htmlFor="password"
-            className="block text-sm font-medium mb-1">
+            className="block text-sm mb-1 font-bold">
             Password
           </label>
           <input

@@ -68,7 +68,7 @@ export default function Navbar() {
                       width={40}
                       height={40}
                       alt="user avatar"
-                      src={session.user.image || "/user_avatar.webp"}
+                      src="/user_avatar.webp"
                     />
                   </div>
                 </div>
